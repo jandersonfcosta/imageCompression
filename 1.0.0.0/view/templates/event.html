@@ -1,0 +1,46 @@
+<!-- info -->
+<div class="info" ng-class="{disabled: !event.active}" flex="auto">
+	<div class="name">
+		{{event.name}}
+	</div>
+	<div class="desc" ng-hide="edit">
+		{{event.siteUrl}}
+	</div>
+</div>
+
+<!-- controls -->
+<div class="controls" layout="row" flex="none">
+	<div ng-class="{fadeIn: eventHover}" ng-show="event.active && !edit && eventHover">
+		<!-- iniciar -->
+		<md-button class="md-icon-button" ng-hide="event.running || !event.start">
+			<i class="material-icons">play_arrow</i>
+			<md-tooltip md-direction="bottom">Iniciar</md-tooltip>
+		</md-button>
+
+		<!-- configurações -->
+		<md-button class="md-icon-button" ng-click="editEvent(event)" ng-hide="event.running">
+			<i class="material-icons">settings</i>
+			<md-tooltip md-direction="bottom">Configurações</md-tooltip>
+		</md-button>
+	</div>
+
+	<div ng-show="event.active && !edit" layout="row" layout-align="center center">
+		<!-- parar -->
+		<md-button ng-class="{fadeIn: eventHover}" class="md-icon-button" ng-show="event.running && eventHover">
+			<i class="material-icons">stop_arrow</i>
+			<md-tooltip md-direction="bottom">Parar</md-tooltip>
+		</md-button>
+
+		<!-- barra de progresso -->
+		<md-button class="progress" ng-show="event.running">
+			<md-progress-linear md-mode="indeterminate" class="md-primary"></md-progress-linear>
+			<md-tooltip md-direction="bottom">Processando imagens...</md-tooltip>
+		</md-button>
+	</div>
+
+	<!-- switch -->
+	<div class="switch" ng-hide="edit || event.running" layout="row" layout-align="center center">
+		<md-switch ng-model="event.active" ng-click="activeEvent(event)"></md-switch>
+		<md-tooltip md-direction="bottom" ng-hide="event.running">{{event.active ? "Desativar" : "Ativar"}}</md-tooltip>
+	</div>
+</div>

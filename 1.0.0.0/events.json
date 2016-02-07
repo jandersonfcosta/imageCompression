@@ -1,0 +1,89 @@
+[
+	{
+		"id": "f2450825-e08d-0cd3-7271-16155a8275ef",
+		"name": "Portal Clemar/CTI",
+		"siteUrl": "http://portalclemar/sitedirectory/cti",
+		"subsites": true,
+		"files":
+		[
+			{"name": "JPG", "active": true},
+			{"name": "PNG", "active": false},
+			{"name": "BMP", "active": false},
+			{"name": "GIF", "active": true},
+			{"name": "TIFF", "active": true}
+		],
+		"width": 2200,
+		"weekDays":
+		[
+			{"name": "Seg", "active": true},
+			{"name": "Ter", "active": true},
+			{"name": "Qua", "active": false},
+			{"name": "Qui", "active": true},
+			{"name": "Sex", "active": false},
+			{"name": "Sáb", "active": false},
+			{"name": "Dom", "active": false}
+		],
+		"startTime": "18:36",
+		"active": true,
+		"start": true,
+		"running": false
+	},
+	{
+		"id": "1f9843c2-320d-223a-9eb1-9f78813801ef",
+		"name": "PWA 2015",
+		"siteUrl": "http://portalclemar/pwa2015",
+		"subsites": false,
+		"files":
+		[
+			{"name": "JPG", "active": true},
+			{"name": "PNG", "active": false},
+			{"name": "BMP", "active": false},
+			{"name": "GIF", "active": true},
+			{"name": "TIFF", "active": false}
+		],
+		"width": 950,
+		"weekDays":
+		[
+			{"name": "Seg", "active": true},
+			{"name": "Ter", "active": true},
+			{"name": "Qua", "active": false},
+			{"name": "Qui", "active": true},
+			{"name": "Sex", "active": false},
+			{"name": "Sáb", "active": false},
+			{"name": "Dom", "active": false}
+		],
+		"startTime": "19:00",
+		"active": true,
+		"start": false,
+		"running": false
+	},
+	{
+		"id": "523f919a-c2cc-a3b6-51cb-d444e3b86375",
+		"name": "PWA 2009",
+		"siteUrl": "http://portalclemar/pwa",
+		"subsites": false,
+		"files":
+		[
+			{"name": "JPG", "active": true},
+			{"name": "PNG", "active": false},
+			{"name": "BMP", "active": false},
+			{"name": "GIF", "active": true},
+			{"name": "TIFF", "active": false}
+		],
+		"width": 1200,
+		"weekDays":
+		[
+			{"name": "Seg", "active": true},
+			{"name": "Ter", "active": true},
+			{"name": "Qua", "active": false},
+			{"name": "Qui", "active": true},
+			{"name": "Sex", "active": false},
+			{"name": "Sáb", "active": false},
+			{"name": "Dom", "active": false}
+		],
+		"startTime": "18:00",
+		"active": true,
+		"start": false,
+		"running": true
+	}
+]

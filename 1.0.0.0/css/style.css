@@ -1,0 +1,306 @@
+body, html {
+	font-size: 12pt;
+	/*font-family: Arial, Helvetica, sans-serif;*/
+	background: #fff;
+}
+
+table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 0;
+}
+
+button {
+	color: #666 !important;
+}
+
+button:hover {
+	background-color: #eee !important;
+}
+
+img {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.disabled {
+    opacity: .5;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: normal;
+}
+
+
+/* layout */
+.row {
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+}
+
+
+/* header */
+.header-place {
+	background-color: rgb(0, 114, 198);
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	position: relative;
+	z-index: 10;
+}
+
+.header {
+	width: 900px;
+	padding-top: 2em;
+}
+
+.header .img img {
+	width: 300px;
+	margin-right: 1em;
+}
+
+.header .title {
+	color: #fff;
+	font-size: 1.6em;
+	font-weight: normal;
+	margin-top: 1em;
+	margin-left: 77px;
+}
+
+.header .desc {
+	color: #ddd;
+	font-size: .95em;
+	margin-top: .25em;
+	margin-bottom: 2.25em;
+	margin-left: 77px;
+}
+
+
+/* toolbar */
+.toolbar {
+	padding: 1.4em;
+	border-bottom: 1px #e5e5e5 solid;
+}
+
+.toolbar button {
+	margin: 0 !important;
+}
+
+
+/* content */
+.content {
+	width: 900px;
+	margin-bottom: 10%;
+}
+
+
+/* events */
+.event {
+	background-color: #fff;
+	border-bottom: 1px #e5e5e5 solid;
+	padding: .85em;
+}
+
+.event .name {
+	font-size: 1.2em;
+	font-weight: 500;
+}
+
+.event .desc {
+	font-size: .95em;
+	color: #666;
+}
+
+.event .controls {
+	padding: .5em;
+}
+
+.event .controls button {
+	margin: 0;
+	margin-right: 1em;
+}
+
+.event .info {
+	padding: .5em;
+}
+
+.event .form {
+	padding: .5em;
+	padding-top: 1.25em;
+	width: 100%;
+}
+
+.event .switch {
+	padding-left: .75em;
+	padding-right: 0;
+}
+
+.event .controls .progress {
+	width: 120px;
+	min-height: 0;
+	padding: 1.1em;
+	margin: 0;
+	cursor: default;
+}
+
+
+/* logs */
+.logs {
+	padding-top: 2.5em;
+}
+
+/* eventForm */
+.event-form {
+	padding: 1.25em;
+}
+
+.event-form-header {
+	color: #000;
+	padding-top: 1em;
+	padding-bottom: 2em;
+}
+
+.event-form-title {
+	padding: 0;
+	font-size: 1.2em;
+	font-weight: 500;
+}
+
+
+/* dialog */
+#newEventDialog {
+	width: 600px;
+	height: 320px !important;
+}
+
+#newEventDialog .title {
+	color: #333;
+	font-size: 1.1em;
+	font-weight: 500;
+	padding: 1.25em;
+	padding-left: 1.2em;
+}
+
+#newEventDialog .content {
+	width: inherit;
+	padding: 1.3em;
+	margin: 0;
+}
+
+#newEventDialog button {
+	min-width: 100px;
+}
+
+
+/* ---------- sobrescreve angular material ---------- */
+md-content {
+	background-color: transparent;
+}
+
+/* tab */
+.md-tab {
+    font-size: .95em;
+	width: 140px;
+}
+
+.md-tab .ng-scope {
+    color: rgba(255,255,255,.5);
+}
+
+.md-tab.md-active .ng-scope{
+    color: #fff;	
+}
+
+md-tabs md-ink-bar {
+	/* barra inferior */
+	height: 3px !important;
+	background-color: #fff;
+}
+
+
+/* dialog */
+md-dialog {
+	min-width: 320px;
+}
+
+md-dialog .md-title {
+	color: #333;
+	font-size: 1.1em;
+	font-weight: 500;
+}
+
+md-dialog .md-dialog-content {
+    padding: 1.25em;
+	margin-bottom: 1.5em;
+}
+
+md-dialog .md-button {
+    min-width: 95px;
+}
+
+md-backdrop.md-opaque {
+	/* backdrop */
+	background-color: #fff;
+	opacity: .6;
+}
+
+
+/* input */
+.md-input-container {
+	padding: 0 !important;
+}
+
+.md-block
+{
+	padding: 0 !important;
+}
+
+.md-input {
+	height: 42px !important;
+	padding-top: .15em !important;
+	padding-left: 0 !important;
+}
+
+.md-input[disabled] {
+    margin-bottom: 0 !important;
+}
+
+.md-input-container .md-placeholder, md-input-container label:not(.md-no-float):not(.md-container-ignore) {
+	/* field label */
+	padding: 0 !important;
+}
+
+
+/* switch */
+md-switch {
+	margin: 0;
+}
+
+
+/* tooltip */
+md-tooltip {
+	border-radius: 4px;
+	font-weight: 500;
+	font-size: .85em;
+}
+
+md-tooltip .md-content {
+	height: 28px;
+	line-height: 28px;
+	padding-left: 9px;
+	padding-right: 9px;
+	background-color: rgba(0,0,0,0.7);
+}
+
+
+/* toast */
+md-toast {
+	min-width: none;
+}

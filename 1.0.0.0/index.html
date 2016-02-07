@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="imageShrink">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="lib/angular_material/1.0.0/angular-material.min.css">
+	<link rel="stylesheet" href="lib/google-material-icons/font-icons.css">
+	<link rel="stylesheet" href="css/animation.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-controller="imageShrinkCtrl">
+
+	<!-- header -->
+	<div layout="row" class="row header-place">
+		<div flex></div>
+
+		<div class="header">
+			<div class="img"><img src="img/sharepoint_2013_logo_blue.png" alt=""></div>
+			<div class="title">Serviço de Compressão de Imagens</div>
+			<div class="desc">
+				Utilize esta ferramenta para reduzir o tamanho e peso de arquivos de imagem do SharePoint.
+			</div>
+
+			<!-- tabs -->
+			<md-tabs ng-init="tab = 'events'">
+				<md-tab label="Eventos" ng-click="tab = 'events'"></md-tab>
+				<md-tab label="Logs" ng-click="tab = 'logs'"></md-tab>
+			</md-tabs>
+		</div>
+
+		<div flex></div>
+	</div>
+
+	<div layout="row" class="row">
+		<div flex></div>
+
+		<!-- content -->
+		<div class="content">
+
+			<!-- eventos -->
+			<div class="events" ng-class="{fadeInScale: tab == 'events'}" ng-hide="tab != 'events'">
+
+				<!-- toolbar -->
+				<div class="toolbar" ng-hide="edit">
+					<md-button class="md-icon-button" ng-click="createEvent($event, 'new')">
+						<i class="material-icons"><strong>add</strong></i>
+						<md-tooltip md-direction="bottom">Novo evento</md-tooltip>
+					</md-button>
+				</div>
+
+				<div class="list" ng-hide="edit">
+					<!-- evento -->
+					<div ng-include="'view/templates/event.html'" class="event" id="{{event.id}}" ng-hide="edit && (event.id != current)" ng-repeat="event in events"
+					ng-style="edit ? {'border-bottom': 0} : null" ng-init="eventHover = false" ng-mouseover="eventHover = true" ng-mouseleave="eventHover = false"
+					layout="row" layout-align="space-between center" layout-wrap></div>
+				</div>
+
+				<!-- event form -->
+				<div ng-include="'view/templates/eventForm.html'" ng-class="{fadeInScale: edit}" ng-hide="tab != 'events' || !edit"></div>
+			</div>
+
+			<!-- logs -->
+			<div class="logs" ng-class="{fadeInScale: tab == 'logs'}" ng-hide="tab != 'logs'">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, blanditiis eius aliquam in quibusdam saepe amet accusantium
+				non cum aliquid ipsam aut deleniti at odit itaque ipsum? Ipsam ab, corporis! Lorem ipsum dolor sit amet, consectetur
+				adipisicing elit. Eum obcaecati deserunt ea pariatur laboriosam eveniet illo sint error. Dolor fuga provident nulla voluptatibus
+				cumque eligendi minima hic voluptates dolorum nostrum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis
+				ad, consequuntur quidem eius illum porro non dolorum laboriosam odio voluptatem autem soluta aliquid maxime quibusdam.
+				Commodi ab dolorem vitae dolorum!
+			</div>
+		</div>
+
+		<div flex></div>
+	</div>
+
+</body>
+<script src="lib/angularjs/1.4.9/angular.min.js"></script>
+<script src="lib/angularjs/1.4.9/angular-animate.min.js"></script>
+<script src="lib/angularjs/1.4.9/angular-aria.min.js"></script>
+<script src="lib/angularjs/1.4.9/angular-messages.min.js"></script>
+<script src="lib/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="js/controllers/imageShrinkCtrl.js"></script>
+<script src="js/services/utilService.js"></script>
+<script src="js/services/eventsAPIService.js"></script>
+
+</html>

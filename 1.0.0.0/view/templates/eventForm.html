@@ -1,0 +1,100 @@
+<form name="eventForm" class="event-form">
+	<!-- cabeçalho -->
+	<div class="event-form-header" layout="row" layout-align="space-between center" layout-wrap>
+		<!-- nome do evento -->
+		<div class="event-form-title">
+			{{formData.name}}
+		</div>
+
+		<!-- controles -->
+		<div class="event-form-controls">
+			<!-- salvar -->
+			<md-button class="md-icon-button" ng-click="saveEvent(formData)" ng-show="edit" ng-disabled="!eventFormIsValid">
+				<i class="material-icons"><strong>done</strong></i>
+				<md-tooltip md-direction="bottom">Salvar</md-tooltip>
+			</md-button>
+
+			<!-- excluir -->
+			<md-button class="md-icon-button" ng-click="deleteEvent(formData)" ng-show="edit">
+				<i class="material-icons">delete</i>
+				<md-tooltip md-direction="bottom">Deletar</md-tooltip>
+			</md-button>
+
+			<!-- duplicar -->
+			<md-button class="md-icon-button" ng-click="duplicateEvent(formData)" ng-show="edit">
+				<i class="material-icons">content_copy</i>
+				<md-tooltip md-direction="bottom">Duplicar</md-tooltip>
+			</md-button>
+
+			<!-- fechar -->
+			<md-button class="md-icon-button" ng-click="closeEvent()" ng-show="edit" style="margin-right:0">
+				<i class="material-icons">close</i>
+				<md-tooltip md-direction="bottom">Fechar</md-tooltip>
+			</md-button>
+		</div>
+	</div>
+
+	<!-- campos -->
+	<md-input-container class="md-block md-primary">
+		<label>Nome</label>
+		<input ng-model="formData.name" ng-required="true" md-autofocus="!exist" ng-change="validateForm(!eventForm.$invalid)">
+	</md-input-container>
+
+	<md-input-container class="md-block" style="margin-bottom:.25em">
+		<label>URL do Site</label>
+		<input ng-model="formData.siteUrl" ng-required="true" placeholder="http://..." ng-change="validateForm(!eventForm.$invalid)">
+	</md-input-container>
+
+	<md-input-container class="md-block" style="margin-bottom:2em; border-bottom:1px solid #e1e1e1">
+		<md-checkbox ng-model="formData.start" ng-change="validateForm(!eventForm.$invalid)">
+			<strong>Execução</strong>
+		</md-checkbox>
+	</md-input-container>
+
+	<div><strong>Arquivos</strong></div>
+	<md-input-container class="md-block" style="margin-bottom:1.5em">
+		<div layout="row" layout-wrap>
+			<div ng-repeat="file in formData.files" style="margin-right:2em">
+				<md-checkbox ng-model="file.active" ng-disabled="!formData.start" ng-change="validateForm(!eventForm.$invalid)">
+					{{file.name}}
+				</md-checkbox>
+			</div>
+		</div>
+	</md-input-container>
+
+	<div><strong>Compressão da imagem</strong></div>
+	<md-input-container class="md-block" style="margin-bottom:.5em; width:160px">
+		<label>Largura máxima (px)</label>
+		<input name="width" ng-model="formData.width" ng-disabled="!formData.start" ng-required="formData.start" ng-pattern="/^[0-9]+$/"
+		ng-change="validateForm(!eventForm.$invalid)">
+		<div ng-messages="eventForm.width.$error" role="alert">
+			<div ng-message="pattern" class="my-message">Somente números inteiros.</div>
+		</div>
+	</md-input-container>
+
+	<div><strong>Cronograma</strong></div>
+	<md-input-container class="md-block" style="margin-bottom:1.5em">
+		<div layout="row" layout-wrap>
+			<div ng-repeat="day in formData.weekDays" style="margin-right:2em">
+				<md-checkbox ng-model="day.active" ng-disabled="!formData.start" ng-change="validateForm(!eventForm.$invalid)">
+					{{day.name}}
+				</md-checkbox>
+			</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container class="md-block" style="width:160px">
+		<label>Horário de início</label>
+		<input name="startTime" ng-model="formData.startTime" ng-required="formData.start" ng-disabled="!formData.start" ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/"
+		placeholder="00:00" ng-change="validateForm(!eventForm.$invalid)">
+		<div ng-messages="eventForm.startTime.$error" role="alert">
+			<div ng-message="pattern" class="my-message">Formato de hora:minuto inválido.</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container class="md-block" style="margin-top:.5em">
+		<md-checkbox ng-model="formData.subsites" ng-disabled="!formData.start">
+			Processar sub-sites
+		</md-checkbox>
+	</md-input-container>
+</form>

@@ -1,0 +1,29 @@
+<md-dialog id="newEventDialog" ng-cloak>
+	<form name="dialogForm">
+		<!-- title -->
+		<div class="title">Novo evento</div>
+
+		<!-- fields -->
+		<md-dialog-content class="content">
+			<md-input-container class="md-block">
+				<label>Nome</label>
+				<input ng-model="event.name" ng-required="true" md-autofocus>
+			</md-input-container>
+
+			<md-input-container class="md-block" style="margin-bottom:.25em">
+				<label>URL do Site</label>
+				<input ng-model="event.siteUrl" ng-required="true" placeholder="http://...">
+			</md-input-container>
+		</md-dialog-content>
+
+		<!-- buttons -->
+		<md-dialog-actions layout="row">
+			<md-button ng-click="cancel()">
+				Cancelar
+			</md-button>
+			<md-button ng-click="save(event)" ng-disabled="dialogForm.$invalid">
+				Salvar
+			</md-button>
+		</md-dialog-actions>
+	</form>
+</md-dialog>

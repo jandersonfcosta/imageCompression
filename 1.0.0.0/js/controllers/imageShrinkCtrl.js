@@ -16,20 +16,20 @@ angular.module("imageShrink", ["ngMaterial", "ngMessages"])
 		$scope.eventFormIsValid = true;
 		$scope.formData = angular.copy(event);
 	};
-	
+
 	// salvar
 	$scope.saveEvent = function(event)
 	{
 		updateEvents(event);
 		$scope.edit = false;
 	};
-	
+
 	// fechar
 	$scope.closeEvent = function()
 	{
 		$scope.edit = false;
 	};
-	
+
 	// novo evento
 	$scope.createEvent = function(ev, mode, event)
 	{
@@ -60,7 +60,7 @@ angular.module("imageShrink", ["ngMaterial", "ngMessages"])
 			};
 		}
 	};
-	
+
 	// ativa/desativa o evento
 	$scope.activeEvent = function(event)
 	{
@@ -98,7 +98,7 @@ angular.module("imageShrink", ["ngMaterial", "ngMessages"])
 				message = "Evento atualizado.";
 			}
 		});
-		
+
 		if(!exist)
 		{
 			// adiciona o novo evento na coleção
@@ -137,7 +137,7 @@ angular.module("imageShrink", ["ngMaterial", "ngMessages"])
 			$mdDialog.hide();
 		});
 	};
-	
+
 	// duplica o evento
 	$scope.duplicateEvent = function(event)
 	{
@@ -148,7 +148,7 @@ angular.module("imageShrink", ["ngMaterial", "ngMessages"])
 		$scope.closeEvent();
 		toast("Evento duplicado.");
 	};
-	
+
 	// toast
 	function toast(message)
 	{
@@ -161,7 +161,7 @@ angular.module("imageShrink", ["ngMaterial", "ngMessages"])
 			.hideDelay(3000)
 		);
 	};
-	
+
 	// valida o preenchimento dos campos
 	$scope.validateForm = function(eventFormIsValid)
 	{

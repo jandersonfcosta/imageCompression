@@ -1,13 +1,19 @@
 /* global eventFormHiddenPlace, eventForm */
 
-angular.module("imageShrink", ["ngMaterial", "ngMessages"])
-.controller("imageShrinkCtrl", function($scope, $mdDialog, $mdToast, eventsAPI, util)
+angular.module("imageCompression", ["ngMaterial", "ngMessages"])
+.controller("imageCompressionCtrl", function($scope, $mdDialog, $mdToast, eventsAPI, util)
 {
 	// carrega os eventos na tela
 	eventsAPI.getEvents().success(function(response)
 	{
 		$scope.events = response;
 	});
+
+	// eventsAPI.getEvents(function(data)
+	// {
+	// 	$scope.events = data;
+	// 	location.href += "#";// atualiza a tela para desocultar os eventos carregados
+	// });
 
 	// editar
 	$scope.editEvent = function(event)

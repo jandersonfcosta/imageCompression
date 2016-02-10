@@ -1,4 +1,4 @@
-angular.module("imageShrink").service("util", function()
+angular.module("imageCompression").service("util", function()
 {
 	this.getGuid = function()
 	{

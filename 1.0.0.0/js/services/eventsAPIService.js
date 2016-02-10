@@ -1,6 +1,7 @@
-angular.module("imageShrink").service("eventsAPI", function($http, util)
+/* global Firebase */
+angular.module("imageCompression").service("eventsAPI", function($http, util)
 {
-	this.events = [];
+	var fireBase = new Firebase('https://c1cf470c7b0241b1826c.firebaseio.com/');
 
 	this.newEvent = function()
 	{
@@ -44,7 +45,15 @@ angular.module("imageShrink").service("eventsAPI", function($http, util)
 		// lê o arquivo
 		return $http.get("events.json");
 	};
-	
+
+	// this.getEvents = function(success)
+	// {
+	// 	fireBase.on("value", function(data)
+	// 	{
+	// 		success(data.val());
+	// 	});
+	// };
+		
 	this.updateEvents = function(events)
 	{
 		// escreve o arquivo

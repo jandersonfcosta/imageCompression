@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="imageCompression">
+<html ng-app="main">
 
 <head>
 	<meta charset="utf-8">
@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body ng-controller="imageCompressionCtrl">
+<body ng-controller="mainCtrl">
 
 	<!-- header -->
 	<div layout="row" class="row header-place">
@@ -78,14 +78,15 @@
 
 </body>
 
-<script src="lib/firebase/2.2.1/firebase.min.js" '></script>
 <script src="lib/angularjs/1.5.0/angular.min.js"></script>
 <script src="lib/angularjs/1.5.0/angular-animate.min.js"></script>
 <script src="lib/angularjs/1.5.0/angular-aria.min.js"></script>
 <script src="lib/angularjs/1.5.0/angular-messages.min.js"></script>
 <script src="lib/angular-material/1.0.0/angular-material.min.js"></script>
-<script src="js/controllers/imageCompressionCtrl.js"></script>
-<script src="js/services/utilService.js"></script>
+<script src="js/controllers/mainCtrl.js"></script>
 <script src="js/services/eventsAPIService.js"></script>
+<script src="js/services/sharePointAPIService.js"></script>
+<script src="js/services/imageCompressionAPIService.js"></script>
+<script src="js/services/utilService.js"></script>
 
 </html>

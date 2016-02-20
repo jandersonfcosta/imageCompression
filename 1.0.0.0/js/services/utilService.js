@@ -1,4 +1,4 @@
-angular.module("imageCompression").service("util", function()
+angular.module("main").service("util", function($mdToast)
 {
 	this.getGuid = function()
 	{
@@ -33,5 +33,18 @@ angular.module("imageCompression").service("util", function()
 		}
 		
 		return times;
+	};
+	
+	// toast
+	this.toast = function (message)
+	{
+		$mdToast.show
+		(
+			$mdToast
+			.simple()
+			.textContent(message)
+			.position("top right")
+			.hideDelay(3000)
+		);
 	};
 });

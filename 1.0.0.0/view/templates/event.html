@@ -12,7 +12,7 @@
 <div class="controls" layout="row" flex="none">
 	<div ng-class="{fadeIn: eventHover}" ng-show="event.active && !edit && eventHover">
 		<!-- iniciar -->
-		<md-button class="md-icon-button" ng-hide="event.running || !event.start">
+		<md-button class="md-icon-button" ng-click="startEvent(event)" ng-hide="event.running || !event.start">
 			<i class="material-icons">play_arrow</i>
 			<md-tooltip md-direction="bottom">Iniciar</md-tooltip>
 		</md-button>
@@ -40,7 +40,7 @@
 
 	<!-- switch -->
 	<div class="switch" ng-hide="edit || event.running" layout="row" layout-align="center center">
-		<md-switch ng-model="event.active" ng-click="activeEvent(event)"></md-switch>
+		<md-switch ng-model="event.active" ng-change="activeEvent(event)"></md-switch>
 		<md-tooltip md-direction="bottom" ng-hide="event.running">{{event.active ? "Desativar" : "Ativar"}}</md-tooltip>
 	</div>
 </div>

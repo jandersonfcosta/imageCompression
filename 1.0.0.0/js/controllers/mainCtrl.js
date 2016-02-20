@@ -1,19 +1,29 @@
-/* global eventFormHiddenPlace, eventForm */
-
-angular.module("imageCompression", ["ngMaterial", "ngMessages"])
-.controller("imageCompressionCtrl", function($scope, $mdDialog, $mdToast, eventsAPI, util)
+angular.module("main", ["ngMaterial", "ngMessages"]);
+angular.module("main").controller("mainCtrl", function($scope, $mdDialog, $mdToast, eventsAPI, imageCompressionAPI, util)
 {
-	// carrega os eventos na tela
-	eventsAPI.getEvents().success(function(response)
-	{
-		$scope.events = response;
-	});
+	$scope.events = [];
 
-	// eventsAPI.getEvents(function(data)
-	// {
-	// 	$scope.events = data;
-	// 	location.href += "#";// atualiza a tela para desocultar os eventos carregados
-	// });
+	// inicia o evento
+	$scope.startEvent = function(event)
+	{
+		imageCompressionAPI.compressImages(event);
+	};
+
+	// carrega os eventos na tela
+	eventsAPI.getEvents()
+	.then(function (response)
+	{
+		// success
+		if(response.data.length > 0)
+		{
+			$scope.events = response.data;
+		}
+	}, function ()
+	{
+		// error
+		alert("Erro ao carregar os eventos.");
+		location.reload();
+	});
 
 	// editar
 	$scope.editEvent = function(event)
@@ -26,7 +36,7 @@ angular.module("imageCompression", ["ngMaterial", "ngMessages"])
 	// salvar
 	$scope.saveEvent = function(event)
 	{
-		updateEvents(event);
+		updateEvents(event, "Evento atualizado.");
 		$scope.edit = false;
 	};
 
@@ -49,14 +59,14 @@ angular.module("imageCompression", ["ngMaterial", "ngMessages"])
 			targetEvent: ev,
 			clickOutsideToClose: true
 		});
-		
+
 		function DialogController($scope, $mdDialog)
 		{
 			$scope.event = angular.copy(newEvent);
 
 			$scope.save = function(event)
 			{
-				updateEvents(event);
+				updateEvents(event, "Evento criado.");
 				$mdDialog.hide();
 			};
 
@@ -70,28 +80,30 @@ angular.module("imageCompression", ["ngMaterial", "ngMessages"])
 	// ativa/desativa o evento
 	$scope.activeEvent = function(event)
 	{
-		$scope.events.filter(function(el, index)
-		{
-			if(el.id == event.id)
-			{
-				// atualiza o evento na coleção
-				el.active = event.active;
-			}
-		});
-
-		_updateEvents();
+		var message = event.active ? "Evento ativado." : "Evento desativado.";
+		_updateEvents(message);
 	};
 
 	// atualiza o arquivo json no servidor
-	function _updateEvents()
+	function _updateEvents(message)
 	{
-		eventsAPI.updateEvents($scope.events);
+		eventsAPI.updateEvents($scope.events)
+		.then(function ()
+		{
+			// success
+			util.toast(message);
+		}, function ()
+		{
+			// error
+			alert("Erro ao enviar os dados.");
+			location.reload();
+		});
 	}
 
 	// atualiza os eventos
-	function updateEvents(event)
+	function updateEvents(event, message)
 	{
-		var exist = false, message;
+		var exist = false;
 
 		$scope.events.filter(function(el, index)
 		{
@@ -101,7 +113,6 @@ angular.module("imageCompression", ["ngMaterial", "ngMessages"])
 
 				// atualiza o evento na coleção
 				$scope.events.splice(index, 1, event);
-				message = "Evento atualizado.";
 			}
 		});
 
@@ -109,11 +120,9 @@ angular.module("imageCompression", ["ngMaterial", "ngMessages"])
 		{
 			// adiciona o novo evento na coleção
 			$scope.events.push(event);
-			message = "Evento criado.";
 		}
 			
-		_updateEvents();
-		toast(message);
+		_updateEvents(message);
 	}
 
 	// deleta o evento
@@ -134,9 +143,9 @@ angular.module("imageCompression", ["ngMaterial", "ngMessages"])
 				return el.id != event.id;
 			});
 
-			_updateEvents();
 			$scope.closeEvent();
-			toast("Evento excluído.");
+			_updateEvents("Evento excluído.");
+			
 		}, function()
 		{
 			// cancel
@@ -152,20 +161,7 @@ angular.module("imageCompression", ["ngMaterial", "ngMessages"])
 		// adiciona o novo evento na coleção
 		$scope.events.push(event);
 		$scope.closeEvent();
-		toast("Evento duplicado.");
-	};
-
-	// toast
-	function toast(message)
-	{
-		$mdToast.show
-		(
-			$mdToast
-			.simple()
-			.textContent(message)
-			.position("top right")
-			.hideDelay(3000)
-		);
+		_updateEvents("Evento duplicado.");
 	};
 
 	// valida o preenchimento dos campos

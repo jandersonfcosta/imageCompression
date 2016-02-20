@@ -40,7 +40,7 @@
 		<input ng-model="formData.name" ng-required="true" md-autofocus="!exist" ng-change="validateForm(!eventForm.$invalid)">
 	</md-input-container>
 
-	<md-input-container class="md-block" style="margin-bottom:.25em">
+	<md-input-container class="md-block" style="margin-bottom:1.5em">
 		<label>URL do Site</label>
 		<input ng-model="formData.siteUrl" ng-required="true" placeholder="http://..." ng-change="validateForm(!eventForm.$invalid)">
 	</md-input-container>
@@ -59,16 +59,6 @@
 					{{file.name}}
 				</md-checkbox>
 			</div>
-		</div>
-	</md-input-container>
-
-	<div><strong>Compressão da imagem</strong></div>
-	<md-input-container class="md-block" style="margin-bottom:.5em; width:160px">
-		<label>Largura máxima (px)</label>
-		<input name="width" ng-model="formData.width" ng-disabled="!formData.start" ng-required="formData.start" ng-pattern="/^[0-9]+$/"
-		ng-change="validateForm(!eventForm.$invalid)">
-		<div ng-messages="eventForm.width.$error" role="alert">
-			<div ng-message="pattern" class="my-message">Somente números inteiros.</div>
 		</div>
 	</md-input-container>
 

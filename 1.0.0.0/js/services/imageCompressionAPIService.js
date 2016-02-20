@@ -11,7 +11,30 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 	
 	this.compressImages = function(event)
 	{
-		sharePointAPI.getSiteLibraries(event.siteUrl).then(function (response)
+		var nextSubsiteIndex = 0;
+		compress();
+
+		function compress()
+		{
+			compressImagesBySite(event.siteUrl, function()
+			{
+				if(event.subsites)
+				{
+					sharePointAPI.getSubSiteByIndex(event.siteUrl, nextSubsiteIndex).then(function (response)
+					{
+						if(response.data.length > 0)
+						{
+							
+						}
+					});
+				}
+			});
+		}
+	};
+	
+	function compressImagesBySite(siteUrl, complete)
+	{
+		sharePointAPI.getSiteLibraries(siteUrl).then(function (response)
 		{
 			var
 			libs = response.data,
@@ -28,7 +51,7 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 				});
 			}
 		});
-	};
+	}
 
 
 
@@ -65,6 +88,7 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 		// error
 	});
 
+	// (não usar)
 	sharePointAPI.getSubSites("http://portalclemar")
 	.then(function (response)
 	{

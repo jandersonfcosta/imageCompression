@@ -17,6 +17,7 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 	function getAllSubsites(siteUrl, complete) {
 		var sites = [];
 		
+		// <<<<<<<<<<<<<<<<<<<< refazer lógica
 		function get(siteUrl) {
 			sharePointAPI.getSubsites(siteUrl).then(function (response)
 			{
@@ -32,6 +33,7 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 			
 			complete(sites);
 		}
+		// <<<<<<<<<<<<<<<<<<<< refazer lógica
 	};
 
 	this.compressImage = function(args) {

@@ -9,29 +9,29 @@ angular.module("main").service("sharePointAPI", function($http)
 		}
 	};
 
-	this.getSubSitesLength = function(parentSiteUrl)
+	this.getSubsitesLength = function(parentSiteUrl)
 	{
 		var
 		url = "/_dev/app/imageCompression/1.0.0.0/services/sharePointAPIService.aspx",
-		data = "method=getSubSitesLength&parentSiteUrl=" + parentSiteUrl;
+		data = "method=getSubsitesLength&parentSiteUrl=" + parentSiteUrl;
 
 		return $http.post(url, data, _postConfig);
 	};
 
-	this.getSubSiteByIndex = function(parentSiteUrl, subSiteIndex)
+	this.getSubsiteByIndex = function(parentSiteUrl, subSiteIndex)
 	{
 		var
 		url = "/_dev/app/imageCompression/1.0.0.0/services/sharePointAPIService.aspx",
-		data = "method=getSubSiteByIndex&parentSiteUrl=" + parentSiteUrl + "&subSiteIndex=" + subSiteIndex;
+		data = "method=getSubsiteByIndex&parentSiteUrl=" + parentSiteUrl + "&subSiteIndex=" + subSiteIndex;
 
 		return $http.post(url, data, _postConfig);
 	};
 
-	this.getSubSites = function(parentSiteUrl)
+	this.getSubsites = function(parentSiteUrl)
 	{
 		var
 		url = "/_dev/app/imageCompression/1.0.0.0/services/sharePointAPIService.aspx",
-		data = "method=getSubSites&parentSiteUrl=" + parentSiteUrl;
+		data = "method=getSubsites&parentSiteUrl=" + parentSiteUrl;
 
 		return $http.post(url, data, _postConfig);
 	};

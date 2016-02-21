@@ -1,63 +1,40 @@
-/* global Firebase */
+/* global angular */
 angular.module("main").service("imageCompressionAPI", function($http, sharePointAPI)
 {
 	var _postConfig =
 	{
-		headers:
-		{
+		headers: {
 			"Content-Type": "application/x-www-form-urlencoded"
 		}
 	};
 	
-	this.compressImages = function(event)
-	{
-		var nextSubsiteIndex = 0;
-		compress();
-
-		function compress()
-		{
-			compressImagesBySite(event.siteUrl, function()
-			{
-				if(event.subsites)
-				{
-					sharePointAPI.getSubSiteByIndex(event.siteUrl, nextSubsiteIndex).then(function (response)
-					{
-						if(response.data.length > 0)
-						{
-							
-						}
-					});
-				}
-			});
-		}
-	};
-	
-	function compressImagesBySite(siteUrl, complete)
-	{
-		sharePointAPI.getSiteLibraries(siteUrl).then(function (response)
-		{
-			var
-			libs = response.data,
-			lib = libs[]
-			
-
-			if(libs.length > 0)
-			{
-				var lib = response.data[0];
-
-				sharePointAPI.getLibraryFiles(event.siteUrl, lib.title).then(function (response)
-				{
-					console.log(response.data);
-				});
-			}
+	this.compressImages = function(event) {
+		getAllSubsites(event.siteUrl, function (sites) {
+			console.log(sites);
 		});
 	}
 
+	function getAllSubsites(siteUrl, complete) {
+		var sites = [];
+		
+		function get(siteUrl) {
+			sharePointAPI.getSubsites(siteUrl).then(function (response)
+			{
+				for(var i in response.data) {
+					var site = response.data[i];
+					sites.push(site);
+					
+					if(Number(site.subsites) > 0) {
+						get(site.url);
+					}
+				}
+			});
+			
+			complete(sites);
+		}
+	};
 
-
-
-	this.compressImage = function(args)
-	{
+	this.compressImage = function(args) {
 		// http://portalclemar/_dev/app/imageCompression/1.0.0.0/services/imageCompressionAPIService.aspx?method=compressImage&siteUrl=http://portalclemar/SiteLab1&listTitle=Documentos&itemId=300
 
 		var
@@ -68,7 +45,7 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 	};
 
 /*
-	sharePointAPI.getSubSitesLength("http://portalclemar")
+	sharePointAPI.getSubsitesLength("http://portalclemar")
 	.then(function (response)
 	{
 		// success
@@ -78,7 +55,7 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 		// error
 	});
 
-	sharePointAPI.getSubSiteByIndex("http://portalclemar", 1)
+	sharePointAPI.getSubsiteByIndex("http://portalclemar", 1)
 	.then(function (response)
 	{
 		// success
@@ -89,7 +66,7 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 	});
 
 	// (não usar)
-	sharePointAPI.getSubSites("http://portalclemar")
+	sharePointAPI.getSubsites("http://portalclemar")
 	.then(function (response)
 	{
 		// success
@@ -120,3 +97,68 @@ angular.module("main").service("imageCompressionAPI", function($http, sharePoint
 	});
 */
 });
+
+/*
+this.compressImages = function(event)
+	{
+		var subsiteUrl, subsiteIndex = 0;
+		var h = [{site: event.siteUrl, parent: null, subsites: null, compress: true}];
+		compress(event.siteUrl, 0);
+
+		function compress(siteUrl, subsiteIndex)
+		{
+			// comprime
+			compressSiteImages(siteUrl, function()
+			{
+				if(event.subsites)
+				{
+					// subsite
+					sharePointAPI.getSubsiteByIndex(siteUrl, subsiteIndex).then(function (response)
+					{
+						if(response.data.length > 0)
+						{
+							subsiteIndex = 0;
+							subsiteUrl = response.data[0].url;
+							h.push({site: subsiteUrl, parent: siteUrl, subsites: response.data[0].subsites, compress: true});
+							
+							compress(subsiteUrl);
+						}
+						else
+						{
+							var parentSite = getParentSite(siteUrl).parent;
+							subsiteIndex++;
+
+							// subsite
+							sharePointAPI.getSubsiteByIndex(parentSite, subsiteIndex).then(function (response)
+							{
+								if(response.data.length > 0)
+								{
+									subsiteUrl = response.data[0].url;
+									h.push({site: subsiteUrl, parent: parentSite, subsites: response.data[0].subsites, compress: true});
+									
+									compress(subsiteUrl);
+								}
+								else
+								{
+									parentSite = getParentSite(getParentSite(siteUrl).parent);
+									subsiteIndex = 0;
+									h.push({site: subsiteUrl, parent: parentSite, subsites: response.data[0].subsites, compress: true});//
+									
+									compress(subsiteUrl);
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+		
+		function getParentSite(siteUrl)
+		{
+			return h.filter(function(el)
+			{
+				return el.site == siteUrl;
+			});
+		}
+	};
+*/

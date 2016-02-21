@@ -17,10 +17,10 @@ protected override void OnLoad(EventArgs e)
 
 		try
 		{
-			if(method == "getSubSitesLength")
+			if(method == "getSubsitesLength")
 			{
 				string parentSiteUrl = Request["parentSiteUrl"];
-				data = GetSubSitesLength(parentSiteUrl).ToString();
+				data = GetSubsitesLength(parentSiteUrl).ToString();
 			}
 			
 			if(method == "getSubSiteByIndex")
@@ -30,10 +30,10 @@ protected override void OnLoad(EventArgs e)
 				data = GetSubSiteByIndex(parentSiteUrl, subSiteIndex);
 			}
 
-			if(method == "getSubSites")
+			if(method == "getSubsites")
 			{
 				string parentSiteUrl = Request["parentSiteUrl"];
-				data = GetSubSites(parentSiteUrl);
+				data = GetSubsites(parentSiteUrl);
 			}
 			
 			if(method == "getSiteLibraries")
@@ -64,7 +64,7 @@ protected override void OnLoad(EventArgs e)
 
 /// MÉTODOS
 
-protected int GetSubSitesLength(string parentSiteUrl)
+protected int GetSubsitesLength(string parentSiteUrl)
 {
 	// retorna o total de sub-sites do site especificado
 
@@ -93,17 +93,18 @@ protected string GetSubSiteByIndex(string parentSiteUrl, int subSiteIndex)
 				item.Add(subSite.ID);
 				item.Add(subSite.Name);
 				item.Add(subSite.Url);
+				item.Add(subSite.Webs.Count);
 				items.Add(item);
 			}
 		}
 	}
 
-	string[] keys = {"id", "name", "url"};
+	string[] keys = {"id", "name", "url", "subsites"};
 	string jsonData = ParseJson(items, keys);
 	return jsonData;
 }
 
-protected string GetSubSites(string parentSiteUrl)
+protected string GetSubsites(string parentSiteUrl)
 {
 	ArrayList items = new ArrayList();
 
@@ -120,13 +121,14 @@ protected string GetSubSites(string parentSiteUrl)
 					item.Add(web.ID);
 					item.Add(web.Name);
 					item.Add(web.Url);
+					item.Add(web.Webs.Count);
 					items.Add(item);
 				}
 			}
 		}
 	}
 
-	string[] keys = {"id", "name", "url"};
+	string[] keys = {"id", "name", "url", "subsites"};
 	string jsonData = ParseJson(items, keys);
 	return jsonData;
 }

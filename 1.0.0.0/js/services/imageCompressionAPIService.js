@@ -22,6 +22,8 @@ angular.module("main").service("imageCompressionAPI", function ($http, sharePoin
 			sharePointAPI.getSiteLibraries(siteUrl).then(function (response) {
 				libs = response.data;
 				libCount = 0;
+				
+console.log(libs[libCount].title)
 
 				if (libs[libCount] != undefined) {
 					_getLibraryFiles(libs[libCount].title);
@@ -33,7 +35,10 @@ angular.module("main").service("imageCompressionAPI", function ($http, sharePoin
 			sharePointAPI.getLibraryFiles(event.siteUrl, libTitle).then(function (response) {
 				files = response.data;
 				fileCount = 0;
-				_compressImage(files[fileCount].id);
+
+console.log(files)
+
+				//_compressImage(files[fileCount].id);
 			});
 		}
 

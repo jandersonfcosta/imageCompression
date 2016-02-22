@@ -17,6 +17,12 @@ protected override void OnLoad(EventArgs e)
 
 		try
 		{
+			if(method == "getSiteInfo")
+			{
+				string siteUrl = Request["siteUrl"];
+				data = GetSiteInfo(siteUrl);
+			}
+
 			if(method == "getSubsitesLength")
 			{
 				string parentSiteUrl = Request["parentSiteUrl"];
@@ -63,6 +69,29 @@ protected override void OnLoad(EventArgs e)
 
 
 /// MÉTODOS
+
+protected int GetSiteInfo(string siteUrl)
+{
+	ArrayList items = new ArrayList();
+
+	using(SPSite site = new SPSite(parentSiteUrl))
+	{
+		using(SPWeb web = site.OpenWeb())
+		{
+			ArrayList item = new ArrayList();
+			item.Add(web.ID);
+			item.Add(web.Name);
+			item.Add(web.Url);
+			item.Add(web.Webs.Count);
+			item.Add(web.IsRootWeb);
+			items.Add(item);
+		}
+	}
+
+	string[] keys = {"id", "name", "url", "subsites", "isRootWeb"};
+	string jsonData = ParseJson(items, keys);
+	return jsonData;
+}
 
 protected int GetSubsitesLength(string parentSiteUrl)
 {
